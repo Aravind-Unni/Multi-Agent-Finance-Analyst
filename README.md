@@ -1,4 +1,4 @@
-# Market Intelligence Agent
+# Market Intelligence Agent Using MCP
 
 A Model Context Protocol (MCP) server built for the Cursor IDE, designed to convert natural language financial queries into executable, visual market insights. This system leverages a deterministic LangGraph architecture and a dynamic multi-LLM strategy to parse intent, generate quantitative Python code, and execute analysis safely within a sandboxed environment.
 
