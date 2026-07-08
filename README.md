@@ -36,7 +36,7 @@ This project strategically routes tasks to different models based on compute con
 
 - **Ollama (Local — `ornith:35b`)**: Powers the Code Writer node. Bypasses cloud rate limits (like Groq) to handle heavy, repetitive code generation tasks securely on-device.
 - **Groq / NVIDIA (Cloud — Llama 3.1 8B)**: Powers the Parser node. Handles high-speed, structured intent extraction (Pydantic JSON enforcement).
-- **NVIDIA NIM (Llama 3.1 70B)**: Acts as the LLM-as-a-Judge in the MLflow evaluation suite, verifying code logic and mathematical accuracy against ground-truth rubrics.
+- **Groq (Llama 3.1 70B)**: Acts as the LLM-as-a-Judge in the MLflow evaluation suite, verifying code logic and mathematical accuracy against ground-truth rubrics.
 
 ## 🛠️ Tech Stack
 
@@ -51,7 +51,7 @@ This project strategically routes tasks to different models based on compute con
 ## ⚙️ Workflow Architecture
 
 1. **Parser Node**: Analyzes raw queries to identify targets (e.g., `TSLA`), timeframes, and actions.
-2. **Writer Node**: Generates pure Python code using `ornith:35b`. It is strictly instructed to use `matplotlib.use('Agg')` to enable headless plotting, preventing GUI crashes in automated loops.
+2. **Writer Node**: Generates pure Python code using `ornith:35b` and Tavily web search is used to fetch code or proper libraries from the web if llm fails at first attempt. It is strictly instructed to use `matplotlib.use('Agg')` to enable headless plotting, preventing GUI crashes in automated loops.
 3. **Executor Node**: Safely executes the generated code, logs results, and writes `output_chart.png` to the local `/outputs` directory.
 
 ## 📂 Project Structure
@@ -80,7 +80,7 @@ C:\Market Intelligence Agent\
 
 - Python 3.12+
 - Ollama installed and running locally.
-- `uv` for dependency management.
+- `uv` for dependency management (install the requirements.txt) .
 
 ### 2. Environment Configuration
 
@@ -119,5 +119,5 @@ To run the automated MLflow evaluation suite against the dataset without trigger
 
 1. Loads `evaluation_dataset.json`.
 2. Cycles through each query via the LangGraph pipeline.
-3. Uses the NVIDIA 70B Judge to score the generated code based on the expected rubric.
+3. Uses the Groq 70B Judge to score the generated code based on the expected rubric.
 4. Outputs the performance metrics and execution traces via MLflow.
