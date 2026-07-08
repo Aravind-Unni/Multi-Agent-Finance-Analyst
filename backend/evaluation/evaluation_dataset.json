@@ -1,0 +1,62 @@
+[
+  {
+    "inputs": "Use the analyze_and_plot tool to generate a line chart showing the YTD stock gain of Tesla.",
+    "target_ticker": "TSLA",
+    "expected_logic": "Calculate percentage return from the first trading day of the current year to the latest available close price.",
+    "rubric": "Uses yfinance to fetch current year data. Normalizes or calculates cumulative percentage return. Saves plot to output_chart.png."
+  },
+  {
+    "inputs": "Plot a line chart comparing the total percentage return of Apple and Microsoft over the last 5 years.",
+    "target_ticker": "AAPL, MSFT",
+    "expected_logic": "Fetch 5 years of historical data, adjust for dividends/splits if possible (or use Close), normalize both to start at 0% or 100% to show relative growth.",
+    "rubric": "Fetches both tickers. Properly normalizes baseline values so comparison is fair. Includes a chart legend distinguishing the two lines."
+  },
+  {
+    "inputs": "Generate a line chart showing the 30-day rolling annualized volatility of NVIDIA over the past year.",
+    "target_ticker": "NVDA",
+    "expected_logic": "Calculate daily log returns, compute standard deviation across a rolling 30-day window, and annualize it by multiplying by sqrt(252).",
+    "rubric": "Code calculates daily returns first (pct_change or log). Uses .rolling(window=30).std(). Annualizes using rolling std * np.sqrt(252)."
+  },
+  {
+    "inputs": "Create a histogram showing the monthly trading volume distribution for Amazon throughout 2025.",
+    "target_ticker": "AMZN",
+    "expected_logic": "Pull full-year 2025 data, resample or group trading volumes by month, and plot the distribution.",
+    "rubric": "Extracts specific timeframe (Jan 1, 2025 - Dec 31, 2025). Correctly groups data using pandas DatetimeIndex or .resample('M'). Plots a histogram or bar chart of monthly aggregates."
+  },
+  {
+    "inputs": "Plot the daily returns distribution of the S&P 500 index over the last two years as a histogram.",
+    "target_ticker": "^GSPC",
+    "expected_logic": "Fetch 2 years of history for the S&P 500 index ticker, compute daily percentage changes, and generate a frequency histogram.",
+    "rubric": "Uses index ticker ^GSPC. Drop NaN values resulting from .pct_change(). Uses plt.hist() or sns.histplot() with clear bin counts."
+  },
+  {
+    "inputs": "Generate a chart showing Bitcoin's price over the past year overlaid with its 50-day and 200-day Simple Moving Averages (SMA).",
+    "target_ticker": "BTC-USD",
+    "expected_logic": "Fetch 1+ year of Bitcoin data, calculate 50-day rolling mean, calculate 200-day rolling mean, plot close price alongside both SMAs.",
+    "rubric": "Fetches crypto ticker BTC-USD. Applies .rolling(window=50).mean() and .rolling(window=200).mean(). Lines must have clear color coding and a legend."
+  },
+  {
+    "inputs": "Create an area chart mapping out Meta's maximum peak-to-trough stock price drawdown over the last 3 years.",
+    "target_ticker": "META",
+    "expected_logic": "Calculate rolling maximum price, compute the percentage distance of current price from that rolling max, and fill the negative space.",
+    "rubric": "Computes cumulative max: .cummax(). Computes drawdown: (Close - CumMax) / CumMax. Uses plt.fill_between() or ax.fill_between() for the area visualization."
+  },
+  {
+    "inputs": "Analyze Alphabet's quarterly revenue trend for the last 4 quarters and plot it as a bar chart.",
+    "target_ticker": "GOOG or GOOGL",
+    "expected_logic": "Access yfinance's fundamental data structures instead of standard historical pricing sheets.",
+    "rubric": "Uses .quarterly_financials or .income_stmt metrics from yfinance. Extracts 'Total Revenue'. Plots a clear horizontal or vertical bar chart showing sequential quarters."
+  },
+  {
+    "inputs": "Show an equally-weighted portfolio performance line chart containing Netflix, AMD, and JPMorgan over the past 12 months.",
+    "target_ticker": "NFLX, AMD, JPM",
+    "expected_logic": "Fetch historical prices for all three assets, compute daily percentage returns, average them daily to simulate a rebalanced/static equal weight, and plot the cumulative path.",
+    "rubric": "Pulls all three specific tickers. Merges or computes an average allocation matrix. Displays the performance over a 12-month window."
+  },
+  {
+    "inputs": "Generate a technical analysis subplot for Advanced Micro Devices showing its close price on top and its 14-day Relative Strength Index (RSI) on the bottom panel.",
+    "target_ticker": "AMD",
+    "expected_logic": "Compute price changes, separate gains/losses, calculate wilder or standard exponential moving averages for a 14-period window to form RSI, plot across 2 stacked subplots.",
+    "rubric": "Uses plt.subplots(2, 1) or equivalent grid configuration. Accurate mathematical representation of RSI (bounds between 0 and 100). Bottom panel should include clear marker lines at 30 (oversold) and 70 (overbought)."
+  }
+]
