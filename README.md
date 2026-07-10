@@ -18,7 +18,7 @@ To connect this agent to Cursor, add the following configuration to your MCP set
     "market-intelligence": {
       "command": "C:/Market Intelligence Agent/.venv/Scripts/python.exe",
       "args": [
-        "server.py"
+        "C:/Market Intelligence Agent/server.py"
       ],
       "env": {
         "PYTHONPATH": "C:/Market Intelligence Agent"
