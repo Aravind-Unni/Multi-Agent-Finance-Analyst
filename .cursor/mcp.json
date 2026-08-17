@@ -1,0 +1,8 @@
+{
+  "mcpServers": {
+    "financial-analyst": {
+      "command": "C:/Market Intelligence Agent/.venv/Scripts/python.exe",
+      "args": ["C:/Market Intelligence Agent/backend/server.py"]
+    }
+  }
+}
