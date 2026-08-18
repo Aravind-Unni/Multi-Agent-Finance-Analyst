@@ -2,7 +2,7 @@
 
 A Model Context Protocol (MCP) server that converts natural language financial queries into executable, visual market insights. The MCP client's own LLM (tested on **Claude Desktop** and **Cursor**) drives three MCP tools — parse, write, execute — in sequence to fetch price data, generate quantitative Python code, and safely execute it to produce a chart.
 
-Live test transcript (Claude Desktop): https://github.com/user-attachments/assets/533914ab-c2cc-47a4-ba84-27d83e555ca9
+Live test (Claude Desktop): https://github.com/user-attachments/assets/533914ab-c2cc-47a4-ba84-27d83e555ca9
 
 
 > Note: this README documents the *current* architecture. An earlier version of this project used a 4-agent LangGraph pipeline (Scout/Quant/Editor/Supervisor) with NVIDIA/Groq-based intent parsing and a LangGraph Supervisor node — that approach was abandoned in favor of the simpler tool-based design below, where the connecting MCP client (Claude Desktop or Cursor) handles orchestration and intent parsing itself, and the server just exposes three tools.
